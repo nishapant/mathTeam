@@ -1,0 +1,12 @@
+#navBar{
+  display: none;
+}
+
+body{
+  padding: 10%;
+}
+
+#banner{
+  text-align: center;
+  margin: 10%;
+}
