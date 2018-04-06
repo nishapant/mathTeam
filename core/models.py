@@ -24,8 +24,8 @@ class Post(models.Model):
 class Question(models.Model):
     grade = models.CharField(max_length=250)
     topic = models.CharField(max_length=250)
-    answer = models.CharField(max_length=250, default=" ")
-    picture = models.CharField(max_length=500, default=" ")
+    questionPicture = models.FileField()
+    answerPicture = models.FileField()
     difficulty = models.CharField(max_length=250)
     year = models.CharField(max_length=250)
     created_date = models.DateTimeField(
