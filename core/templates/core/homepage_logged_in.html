@@ -9,14 +9,23 @@
   <script src="{% static 'js/script.js' %}"></script>
   <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 </head>
-<body>
-    <h1 id="name">Welcome, {{ user.username }}</h1>
+<body onload="reset()">
   <div onclick="showMenu()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></div>
-  <div id="navBar">
-    <a href="{% url 'core:post_list' %}">questions</a>
-    <a href="{% url 'core:question_list' %}">problem sets</a>
-    <a href="{% url 'core:logout_user' %}">logout</a>
+  <nav class="navbar navbar-default" id="navBar">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Conant Math Team</a>
+    </div>
+    <br><br>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="active"><a href="/core/homepage_logged_in.html/">Home</a></li>
+      <li><a href="{% url 'core:post_list' %}">Updates</a></li>
+      <li><a href="{% url 'core:question_list' %}">Problem Sets</a></li>
+      <li><a href="{% url 'core:logout_user' %}">Logout</a></li>
+    </ul>
   </div>
+</nav>
+<h3 id="name">Welcome, {{ user.username }}</h3>
   <div id="banner">
     <h1>start practice today</h1>
     <a href="{% url 'core:register' %}"><button class="btn btn-default">sign up</button></a>

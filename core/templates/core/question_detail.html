@@ -1,3 +1,14 @@
-{{ question }}
-<img src="{{ question.questionPicture.url }}">
-<img src="{{ question.answerPicture.url }}">
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conant Math Team Updates</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+  {{ question }}
+  <img class="img-responsive" src="{{ question.questionPicture.url }}" width="1000" height="500">
+  <img class="img-responsive"src="{{ question.answerPicture.url }}" width="1000" height="500">
+</body>
+</html>

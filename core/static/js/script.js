@@ -8,3 +8,8 @@ function showMenu(){
   }
   menu = !menu;
 }
+
+function reset(){
+  document.getElementById('navBar').style.display = "block";
+  var menu = true;
+}

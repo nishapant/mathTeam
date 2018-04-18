@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Conant Math Team Updates</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+</head>
+<body>
+  <div class="container-fluid songs-container">
+
+  <div class="row">
+      <div class="col-sm-12">
+          <ul class="nav nav-pills" style="margin-bottom: 10px;">
+              <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a href="{% url 'core:questions' 'all' %}">View All</a></li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="row">
+
+      <div class="col-sm-12">
+
+          <div class="panel panel-default">
+              <div class="panel-body">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>Year</th>
+                              <th>Grade</th>
+                              <th>Topic</th>
+                              <th>Difficulty</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {% for question in question_list %}
+                          <div>
+
+                            <tr>
+                                <td><a href="{% url 'core:detail' question.id %}">{{ question.year}}</a></td>
+                                <td>{{ question.grade }}</td>
+                                <td>{{ question.topic }}</td>
+                                <td>{{ question.difficulty }}</td>
+                            </tr>
+
+                          </div>
+
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>
+</body>
+</html>

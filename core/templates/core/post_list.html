@@ -5,9 +5,27 @@
   <title>Conant Math Team Updates</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+  <script src="{% static 'js/script.js' %}"></script>
 </head>
-<body>
-  <h1>conant math team updates</h1>
+<body onload="reset()">
+  <div onclick="showMenu()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></div>
+  <nav class="navbar navbar-default" id="navBar">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Conant Math Team</a>
+    </div>
+    <br><br>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="{% url 'core:homepage' %}">Home</a></li>
+      <li class="active"><a href="{% url 'core:post_list' %}">Updates</a></li>
+      <li><a href="{% url 'core:question_list' %}">Problem Sets</a></li>
+      <li><a href="{% url 'core:logout_user' %}">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  <h1>Conant Math Team Updates</h1>
   <div>
   {% for post in posts %}
   <div>

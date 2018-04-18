@@ -10,11 +10,6 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
 </head>
 <body>
-  <div onclick="showMenu()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></div>
-  <div id="navBar">
-    <a href="{% url 'core:post_list' %}">questions</a>
-    <a href="{% url 'core:question_list' %}">problem sets</a>
-  </div>
   <div id="banner">
     <h1>start practice today</h1>
     <a href="{% url 'core:register' %}"><button class="btn btn-default">sign up</button></a>

@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 from django.db import models
 from django.utils import timezone
@@ -24,6 +23,7 @@ class Post(models.Model):
 class Question(models.Model):
     grade = models.CharField(max_length=250)
     topic = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, default="")
     questionPicture = models.FileField()
     answerPicture = models.FileField()
     difficulty = models.CharField(max_length=250)
