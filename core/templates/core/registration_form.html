@@ -17,6 +17,9 @@
           <div class="panel panel-default">
               <div class="panel-body">
                 <h3>Register a New Account:</h3>
+                {% if error_message %}
+                    <p><strong>{{ error_message }}</strong></p>
+                {% endif %}
                   <form class="form-horizontal" method="post" enctype="multipart/form-data">
                       {% csrf_token %}
                       {% include 'core/form_template.html' %}

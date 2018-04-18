@@ -46,11 +46,8 @@ class UserFormView(View):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'core/index.html', {})
-        context = {
-            "form": form,
-        }
-        return render(request, 'core/registration_form.html', context)
+                    return render(request, 'core/homepage_logged_in.html', {})
+        return render(request, 'core/registration_form.html', {'form': form, 'error_message': 'your username or email may already be registered. please choose another one'})
 
 def logout_user(request):
     logout(request)
@@ -69,7 +66,7 @@ def login_user(request):
             if user.is_active:
                 login(request, user)
                 questions = Question.objects.all()
-                return render(request, 'core/index.html', {'questions': questions})
+                return render(request, 'core/homepage_logged_in.html', {'questions': questions})
             else:
                 return render(request, 'core/login.html', {'error_message': 'Your account has been disabled'})
         else:
