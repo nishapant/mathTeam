@@ -4,11 +4,56 @@
 <head>
   <title>Conant Math Team Updates</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+
 </head>
 <body>
-  {{ question }}
+  <body onload="reset()">
+    <div class="questions-container">
+    <div onclick="showMenu()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></div>
+    <nav class="navbar navbar-default" id="navBar">
+      <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Conant Math Team</a>
+      </div>
+      <br><br>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="{% url 'core:homepage' %}">Home</a></li>
+        <li><a href="{% url 'core:post_list' %}">Updates</a></li>
+        <li class="active"><a href="{% url 'core:question_list' %}">Problem Sets</a></li>
+        <li><a href="{% url 'core:logout_user' %}">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <h1>Conant Math Team Questions</h1>
   <img class="img-responsive" src="{{ question.questionPicture.url }}" width="1000" height="500">
-  <img class="img-responsive"src="{{ question.answerPicture.url }}" width="1000" height="500">
+
+  {% if question.is_complete %}
+    <a href="{% url 'core:complete' question.id %}"><p>complete</p></a>
+  {% else %}
+      <a href="{% url 'core:complete' question.id %}"><p>not complete</p></a>
+  {% endif %}
+
+  {% if submitbutton %}
+  <form action="{% url 'core:detail' question.id %}" method="post" role="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" name="hide" value="hide answer" class="btn-default"/>
+  </form>
+  <img class="img-responsive"src="{{ question.answerPicture.url }}" width="1000" height="500" id="answer">
+  {% else %}
+  <form action="{% url 'core:detail' question.id %}" method="post" role="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <input type="submit" name="submit" value="show answer" class="btn-default"/>
+  </form>
+  {% endif %}
+</div>
 </body>
 </html>

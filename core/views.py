@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from .forms import UserForm
+from django.http import JsonResponse
 from django.db.models import Q
 
 
@@ -39,7 +40,15 @@ def question_list(request):
             return render(request, 'core/question_list.html', {'questions': questions})
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'core/question_detail.html', {'question': question})
+    submitbutton= request.POST.get('submit')
+    if submitbutton:
+        context={
+        'submitbutton': submitbutton,
+        'question': question
+        }
+        return render(request, 'core/question_detail.html', context)
+    else:
+        return render(request, 'core/question_detail.html', {'question': question})
 
 
 
@@ -110,3 +119,21 @@ def questions(request, filter_by):
             'question_list': users_questions,
             'filter_by': filter_by,
         })
+def complete(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try:
+        if question.is_complete:
+            question.is_complete = False
+        else:
+            question.is_complete = True
+        question.save()
+    except (KeyError, Question.DoesNotExist):
+        context={
+        'question': question
+        }
+        return render(request, 'core/question_detail.html', context)
+    else:
+        context={
+        'question': question
+        }
+        return render(request, 'core/question_detail.html', context)

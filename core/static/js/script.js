@@ -13,7 +13,3 @@ function reset(){
   document.getElementById('navBar').style.display = "none";
   var menu = false;
 }
-
-function hideAll(){
-  document.getElementsByClassName('questionList').style.display = "none";
-}
