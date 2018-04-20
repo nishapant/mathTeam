@@ -28,9 +28,10 @@ def question_list(request):
                 Q(topic__icontains=query) |
                 Q(difficulty__icontains=query) |
                 Q(year__icontains=query) |
-                Q(grade__icontains=query)
+                Q(grade__icontains=query)|
+                Q(description__icontains=query)
             ).distinct()
-            return render(request, 'core/question_list.html', {
+            return render(request, 'core/questions.html', {
                 'questions': questions,
                 'question_results': question_results,
             })
@@ -93,6 +94,7 @@ def login_user(request):
 
 def homepage(request):
     return render(request, 'core/homepage_logged_in.html', {})
+
 def questions(request, filter_by):
     if not request.user.is_authenticated():
         return render(request, 'core/login.html')
@@ -105,6 +107,6 @@ def questions(request, filter_by):
         except Question.DoesNotExist:
             users_questions = []
         return render(request, 'core/questions.html', {
-            'question_list': users_songs,
+            'question_list': users_questions,
             'filter_by': filter_by,
         })

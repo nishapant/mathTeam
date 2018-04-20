@@ -23,7 +23,7 @@ class Post(models.Model):
 class Question(models.Model):
     grade = models.CharField(max_length=250)
     topic = models.CharField(max_length=250)
-    description = models.CharField(max_length=250, default="")
+    description = models.TextField(default="")
     questionPicture = models.FileField()
     answerPicture = models.FileField()
     difficulty = models.CharField(max_length=250)
