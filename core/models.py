@@ -2,6 +2,7 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -23,7 +24,8 @@ class Post(models.Model):
 class Question(models.Model):
     grade = models.CharField(max_length=250)
     topic = models.CharField(max_length=250)
-    description = models.TextField(default="")
+    description = models.TextField(default="", blank=True)
+    answer = models.CharField(max_length=250, default="1")
     questionPicture = models.FileField()
     answerPicture = models.FileField()
     difficulty = models.CharField(max_length=250)

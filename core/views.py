@@ -29,8 +29,7 @@ def question_list(request):
                 Q(topic__icontains=query) |
                 Q(difficulty__icontains=query) |
                 Q(year__icontains=query) |
-                Q(grade__icontains=query)|
-                Q(description__icontains=query)
+                Q(grade__icontains=query)
             ).distinct()
             return render(request, 'core/questions.html', {
                 'questions': questions,
@@ -41,10 +40,17 @@ def question_list(request):
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     submitbutton= request.POST.get('submit')
+    submitAnswerButton = request.POST.get('submitAnswer')
     if submitbutton:
         context={
         'submitbutton': submitbutton,
         'question': question
+        }
+        return render(request, 'core/question_detail.html', context)
+    elif submitAnswerButton:
+        context={
+            'submitAnswerButton': submitAnswerButton,
+            'question': question
         }
         return render(request, 'core/question_detail.html', context)
     else:
@@ -120,7 +126,7 @@ def questions(request, filter_by):
             'filter_by': filter_by,
         })
 def complete(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question, pk=question_id, user=request.user)
     try:
         if question.is_complete:
             question.is_complete = False

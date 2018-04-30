@@ -38,22 +38,35 @@
       <a href="{% url 'core:complete' question.id %}"><p>not complete</p></a>
   {% endif %}
 
+
   {% if submitbutton %}
-  <form action="{% url 'core:detail' question.id %}" method="post" role="form">
-    {% csrf_token %}
-    {{ form.as_p }}
+    <!-- <form action="{% url 'core:detail' question.id %}" method="post" role="form">
+      {% csrf_token %}
+      {{ form.as_p }}
 
-    <input type="submit" name="hide" value="hide answer" class="btn-default"/>
-  </form>
-  <img class="img-responsive"src="{{ question.answerPicture.url }}" width="1000" height="500" id="answer">
-  {% else %}
-  <form action="{% url 'core:detail' question.id %}" method="post" role="form">
-    {% csrf_token %}
-    {{ form.as_p }}
+      <input type="submit" name="hide" value="hide answer" class="btn-default"/>
+    </form> -->
+    <img class="img-responsive"src="{{ question.answerPicture.url }}" width="1000" height="500" id="answer">
 
-    <input type="submit" name="submit" value="show answer" class="btn-default"/>
-  </form>
+  {% elif not submitAnswerButton %}
+    <form action="{% url 'core:detail' question.id %}" method="post" role="form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="input" name="answer" placeholder="type answer here">
+      <input type="submit" name="submitAnswer" value="submit answer" class="btn-default"/>
+    </form>
+
+    {% elif not submitbutton %}
+
+      <form action="{% url 'core:detail' question.id %}" method="post" role="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" name="submit" value="show answer" class="btn-default"/>
+      </form>
+
   {% endif %}
+
 </div>
 </body>
 </html>
