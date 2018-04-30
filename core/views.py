@@ -18,25 +18,29 @@ def post_list(request):
     return render(request, 'core/post_list.html', {'posts': posts})
 
 def question_list(request):
+    topiclist = ['probability', 'ratios', 'quadratics', 'area', 'logic','geometry']
+    grades = ['freshman', 'sophomore', 'junior', 'senior']
     if not request.user.is_authenticated:
         return render(request, 'core/login.html')
     else:
         question_results = Question.objects.all()
         questions = Question.objects.all()
-        query = request.GET.get("q")
-        if query:
-            question_results = question_results.filter(
-                Q(topic__icontains=query) |
-                Q(difficulty__icontains=query) |
-                Q(year__icontains=query) |
-                Q(grade__icontains=query)
-            ).distinct()
-            return render(request, 'core/questions.html', {
-                'questions': questions,
-                'question_results': question_results,
-            })
-        else:
-            return render(request, 'core/question_list.html', {'questions': questions})
+        for topic in topiclist:
+            button = request.POST.get(topic)
+            # query = request.GET.get("q")
+            if button:
+                question_results = question_results.filter(
+                    Q(topic__icontains=topic) |
+                    Q(difficulty__icontains=topic) |
+                    Q(year__icontains=topic) |
+                    Q(grade__icontains=topic)
+                ).distinct()
+                return render(request, 'core/questions.html', {
+                    'questions': questions,
+                    'question_results': question_results,
+                })
+
+        return render(request, 'core/question_list.html', {'questions': questions})
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     submitbutton= request.POST.get('submit')

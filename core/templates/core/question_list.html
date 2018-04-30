@@ -27,11 +27,27 @@
 </nav>
   <h1>Conant Math Team Questions</h1>
   <div>
-    <form role="search" method="get" action="{% url 'core:question_list' %}">
-              <div class="form-group">
+    <form role="form" method="post" action="{% url 'core:question_list' %}">
+              <!-- <div class="form-group">
                   <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="search topics">
-              </div>
-              <button type="submit" class="btn btn-default">Search</button>
+              </div> -->
+              {% csrf_token %}
+              {{ form.as_p }}
+                <button value="probability" name="probability" type="submit">probability</button>
+                <button value="ratios" name="ratios" type="submit">ratios, proportions, and percents</button>
+                <button value="quadratics" name="quadratics" type="submit">quadratics</button>
+                <button value="area" name="area" type="submit">perimeter, area, surface area</button>
+                <button value="logic" name="logic" type="submit">logic, sets, venn diagram</button>
+                <button value="geometry" name="geometry" type="submit">geometry</button>
+
+                <button value="freshman" name="freshman" type="submit">freshman</button>
+                <button value="sophomore" name="sophomore" type="submit">sophomore</button>
+                <button value="junior" name="junior" type="submit">junior</button>
+                <button value="senior" name="senior" type="submit">senior</button>
+
+                <!-- <input class="dropdown-item form-control" value="ratios" name="ratios" type="button">
+                <input class="dropdown-item form-control" value="geometry" name="geometry" type="button"> -->
+              <button type="submit" class="btn btn-default" name="submit">Search</button>
     </form>
   <div >
   {% for question in questions %}
