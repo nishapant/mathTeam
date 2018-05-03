@@ -18,8 +18,15 @@ def post_list(request):
     return render(request, 'core/post_list.html', {'posts': posts})
 
 def question_list(request):
-    topiclist = ['probability', 'ratios', 'quadratics', 'area', 'logic','geometry']
-    grades = ['freshman', 'sophomore', 'junior', 'senior']
+    topiclist = ['Ratios, Proportions and Percents','Number Theory and Divisibility','Counting Basics and Probability'
+    , 'Quadratics', 'Probability', 'Advanced Geometrical Concepts', 'Perimeter, Area and Surface Area',
+    'Logic, Sets and Venn Diagram', 'Similarity', 'Coordiante Geometry', 'Circles', 'Trigonometry',
+    'Parametric Equations', 'Theory of Equations']
+    grades = ['Freshman', 'Sophomore', 'Junior', 'Senior']
+    questionNumbers= ['1','2','3','4','5']
+    topicsSearched=[]
+    gradesSearched = []
+    numberSearched = []
     if not request.user.is_authenticated:
         return render(request, 'core/login.html')
     else:
@@ -27,20 +34,37 @@ def question_list(request):
         questions = Question.objects.all()
         for topic in topiclist:
             button = request.POST.get(topic)
-            # query = request.GET.get("q")
             if button:
-                question_results = question_results.filter(
-                    Q(topic__icontains=topic) |
-                    Q(difficulty__icontains=topic) |
-                    Q(year__icontains=topic) |
-                    Q(grade__icontains=topic)
-                ).distinct()
-                return render(request, 'core/questions.html', {
-                    'questions': questions,
-                    'question_results': question_results,
-                })
+                topicsSearched.append(topic)
+        for grade in grades:
+            button = request.POST.get(grade)
+            if button:
+                gradesSearched.append(grade)
+        for number in numberSearched:
+            button = request.POST.get(number)
+            if button:
+                gradesSearched.append(number)
+        print(gradesSearched)
+        print(numberSearched)
+        print(topicsSearched)
+        if topicsSearched or gradesSearched or numberSearched:
+            if topicsSearched:
+                question_results = question_results.filter(topic__in=topicsSearched)
+            if gradesSearched:
+                question_results = question_results.filter(grade__in=gradesSearched)
+            if numberSearched:
+                question_results = question_results.filter(difficulty__in=numberSearched)
+            return render(request, 'core/questions.html', {
+                        'questions': questions,
+                        'question_results': question_results,
+                    })
+
 
         return render(request, 'core/question_list.html', {'questions': questions})
+
+
+
+
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     submitbutton= request.POST.get('submit')

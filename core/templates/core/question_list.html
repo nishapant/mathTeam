@@ -25,28 +25,37 @@
     </ul>
   </div>
 </nav>
-  <h1>Conant Math Team Questions</h1>
+  <h1>Conant Math Team Questions- nothing searched</h1>
   <div>
     <form role="form" method="post" action="{% url 'core:question_list' %}">
-              <!-- <div class="form-group">
-                  <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" placeholder="search topics">
-              </div> -->
               {% csrf_token %}
               {{ form.as_p }}
-                <button value="probability" name="probability" type="submit">probability</button>
-                <button value="ratios" name="ratios" type="submit">ratios, proportions, and percents</button>
-                <button value="quadratics" name="quadratics" type="submit">quadratics</button>
-                <button value="area" name="area" type="submit">perimeter, area, surface area</button>
-                <button value="logic" name="logic" type="submit">logic, sets, venn diagram</button>
-                <button value="geometry" name="geometry" type="submit">geometry</button>
+                <input value="Ratios, Proportions and Percents" type="checkbox" name="Ratios, Proportions and Percents">Ratios, Proportions and Percents<br>
+                <input value="Number Theory and Divisibility" type="checkbox"name="Number Theory and Divisibility">Number Theory and Divisibility<br>
+                <input value="Counting Basics and Probability" type="checkbox"name="Counting Basics and Probability">Counting Basics and Probability<br>
+                <input value="Quadratics" type="checkbox" name="Quadratics">Quadratics<br>
+                <input value="Probability" type="checkbox" name="Probability">Probability<br>
+                <input value="Advanced Geometrical Concepts" type="checkbox" name="Advanced Geometrical Concepts">Advanced Geometrical Concepts<br>
+                <input value="Perimeter, Area and Surface Area" type="checkbox" name="Perimeter, Area and Surface Area">Perimeter, Area and Surface Area<br>
+                <input value="Logic, Sets and Venn Diagram" type="checkbox"name="Logic, Sets and Venn Diagram">Logic, Sets and Venn Diagram<br>
+                <input value="Similarity" type="checkbox"name="Similarity">Similarity<br>
+                <input value="Coordiante Geometry" type="checkbox" name="Coordiante Geometry">Coordiante Geometry<br>
+                <input value="Circles" type="checkbox" name="Circles">Circles<br>
+                <input value="Trigonometry" type="checkbox" name="Trigonometry">Trigonometry<br>
+                <input value="Parametric Equations" type="checkbox" name="Parametric Equations">Parametric Equations<br>
+                <input value="Theory of Equations" type="checkbox" name="Theory of Equations">Theory of Equations<br>
 
-                <button value="freshman" name="freshman" type="submit">freshman</button>
-                <button value="sophomore" name="sophomore" type="submit">sophomore</button>
-                <button value="junior" name="junior" type="submit">junior</button>
-                <button value="senior" name="senior" type="submit">senior</button>
+                <input value="Freshman" type="checkbox" name="Freshman">Freshman<br>
+                <input value="Sophomore" type="checkbox" name="Sophomore">Sophomore<br>
+                <input value="Junior" type="checkbox" name="Junior">Junior<br>
+                <input value="Senior" type="checkbox" name="Senior">Senior<br>
 
-                <!-- <input class="dropdown-item form-control" value="ratios" name="ratios" type="button">
-                <input class="dropdown-item form-control" value="geometry" name="geometry" type="button"> -->
+                <input value="1" type="checkbox" name="1">1<br>
+                <input value="2" type="checkbox" name="2">2<br>
+                <input value="3" type="checkbox" name="3">3<br>
+                <input value="4" type="checkbox" name="4">4<br>
+                <input value="5" type="checkbox" name="5">5<br>
+
               <button type="submit" class="btn btn-default" name="submit">Search</button>
     </form>
   <div >

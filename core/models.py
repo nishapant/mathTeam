@@ -22,13 +22,43 @@ class Post(models.Model):
 
 
 class Question(models.Model):
-    grade = models.CharField(max_length=250)
-    topic = models.CharField(max_length=250)
+    GRADES_LIST = (
+        ('Freshman', 'Freshman'),
+        ('Sophomore', 'Sophomore'),
+        ('Junior', 'Junior'),
+        ('Senior', 'Senior'),
+    )
+    TOPIC_LIST = (
+        ('Ratios, Proportions and Percents', 'Ratios, Proportions and Percents'),
+        ('Number Theory and Divisibility', 'Number Theory and Divisibility'),
+        ('Counting Basics and Probability', 'Counting Basics and Probability'),
+        ('Quadratics', 'Quadratics'),
+        ('Probability', 'Probability'),
+        ('Advanced Geometrical Concepts', 'Advanced Geometrical Concepts'),
+        ('Perimeter, Area and Surface Area', 'Perimeter, Area and Surface Area'),
+        ('Logic, Sets and Venn Diagram', 'Logic, Sets and Venn Diagram'),
+        ('Similarity', 'Similarity'),
+        ('Coordiante Geometry', 'Coordiante Geometry'),
+        ('Circles', 'Circles'),
+        ('Trigonometry', 'Trigonometry'),
+        ('Parametric Equations', 'Parametric Equations'),
+        ('Theory of Equations', 'Theory of Equations'),
+    )
+    QUESTION_NUMBERS = (
+        ('1','1'),
+        ('2','2'),
+        ('3','3'),
+        ('4','4'),
+        ('5','5')
+    )
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    grade = models.CharField(max_length=9, choices=GRADES_LIST, default='Freshman')
+    topic = models.CharField(max_length=100, choices=TOPIC_LIST, default='Ratios, Proportions and Percents')
     description = models.TextField(default="", blank=True)
     answer = models.CharField(max_length=250, default="1")
     questionPicture = models.FileField()
     answerPicture = models.FileField()
-    difficulty = models.CharField(max_length=250)
+    difficulty = models.CharField(max_length=3, choices=QUESTION_NUMBERS, default='1')
     year = models.CharField(max_length=250)
     created_date = models.DateTimeField(
             default=timezone.now)
