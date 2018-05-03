@@ -69,6 +69,7 @@ def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     submitbutton= request.POST.get('submit')
     submitAnswerButton = request.POST.get('submitAnswer')
+    correctAnswer = False
     if submitbutton:
         context={
         'submitbutton': submitbutton,
@@ -76,9 +77,13 @@ def detail(request, question_id):
         }
         return render(request, 'core/question_detail.html', context)
     elif submitAnswerButton:
+        input = request.POST.get('answer')
+        if input == question.answer:
+            correctAnswer = True
         context={
             'submitAnswerButton': submitAnswerButton,
-            'question': question
+            'question': question,
+            'correctAnswer': correctAnswer,
         }
         return render(request, 'core/question_detail.html', context)
     else:

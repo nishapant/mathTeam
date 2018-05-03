@@ -61,7 +61,11 @@
       <form action="{% url 'core:detail' question.id %}" method="post" role="form">
         {% csrf_token %}
         {{ form.as_p }}
-
+        {% if correctAnswer %}
+          <p>you are correct</p>
+        {% else %}
+          <p>you are incorrect</p>
+        {% endif %}
         <input type="submit" name="submit" value="show answer" class="btn-default"/>
       </form>
 
