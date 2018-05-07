@@ -40,10 +40,10 @@ def question_list(request):
             button = request.POST.get(grade)
             if button:
                 gradesSearched.append(grade)
-        for number in numberSearched:
+        for number in questionNumbers:
             button = request.POST.get(number)
             if button:
-                gradesSearched.append(number)
+                numberSearched.append(number)
         print(gradesSearched)
         print(numberSearched)
         print(topicsSearched)

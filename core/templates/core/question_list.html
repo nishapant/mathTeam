@@ -3,36 +3,85 @@
 <html>
 <head>
   <title>Conant Math Team Updates</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
   <script src="{% static 'js/script.js' %}"></script>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body onload="reset()">
-  <div onclick="showMenu()"><i class="fa fa-bars fa-lg" aria-hidden="true"></i></div>
-  <nav class="navbar navbar-default" id="navBar">
-    <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Conant Math Team</a>
-    </div>
-    <br><br>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="{% url 'core:homepage' %}">Home</a></li>
-      <li><a href="{% url 'core:post_list' %}">Updates</a></li>
-      <li class="active"><a href="{% url 'core:question_list' %}">Problem Sets</a></li>
-      <li><a href="{% url 'core:logout_user' %}">Logout</a></li>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Conant Math Team</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navBar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'core:homepage' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'core:post_list' %}">Updates</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'core:question_list' %}">Practice Problems</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'core:logout_user' %}">Logout</a>
+      </li>
     </ul>
   </div>
+  <div id="name">
+    <h3 id="welcome">Welcome, {{ user.username }}</h3>
+  <div>
 </nav>
-  <h1>Conant Math Team Questions- nothing searched</h1>
+  <h1>Practice Problems</h1>
   <div>
     <form role="form" method="post" action="{% url 'core:question_list' %}">
               {% csrf_token %}
               {{ form.as_p }}
+              <!-- <div id="list1" class="dropdown-check-list" tabindex="100">
+                <span class="anchor">Select Topics</span>
+                <ul class="items">
+                  <li><input value="Ratios, Proportions and Percents" type="checkbox" name="Ratios, Proportions and Percents" />Ratios, Proportions and Percents</li>
+                  <li><input value="Number Theory and Divisibility" type="checkbox"name="Number Theory and Divisibility" />Number Theory and Divisibility</li>
+                  <li>  <input value="Counting Basics and Probability" type="checkbox"name="Counting Basics and Probability" />Counting Basics and Probability</li>
+                  <li><input value="Quadratics" type="checkbox" name="Quadratics" />Quadratics</li>
+                  <li><input value="Probability" type="checkbox" name="Probability" />Probability</li>
+                  <li>  <input value="Advanced Geometrical Concepts" type="checkbox" name="Advanced Geometrical Concepts" />Advanced Geometrical Concepts</li>
+                  <li><input value="Perimeter, Area and Surface Area" type="checkbox" name="Perimeter, Area and Surface Area" />Perimeter, Area and Surface Area</li>
+                  <li>  <input value="Logic, Sets and Venn Diagram" type="checkbox"name="Logic, Sets and Venn Diagram" />Logic, Sets and Venn Diagram</li>
+                  <li><input value="Similarity" type="checkbox"name="Similarity" />Similarity</li>
+                  <li><input value="Coordiante Geometry" type="checkbox" name="Coordiante Geometry" />Coordiante Geometry</li>
+                  <li><input value="Circles" type="checkbox" name="Circles" />Circles</li>
+                  <li><input value="Trigonometry" type="checkbox" name="Trigonometry" />Trigonometry</li>
+                  <li>  <input value="Parametric Equations" type="checkbox" name="Parametric Equations" />Parametric Equations</li>
+                  <li>  <input value="Theory of Equations" type="checkbox" name="Theory of Equations" />Theory of Equations</li>
+                </ul>
+              </div>
+              <div class="container">
+                <div class="row">
+                     <div class="col-lg-12">
+                       <div class="button-group">
+                         <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Select Topic</button>
+                         <ul class="dropdown-menu">
+                          <li><a href="#" class="small" data-value="option1" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 1</a></li>
+                          <li><a href="#" class="small" data-value="option2" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 2</a></li>
+                          <li><a href="#" class="small" data-value="option3" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 3</a></li>
+                          <li><a href="#" class="small" data-value="option4" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 4</a></li>
+                          <li><a href="#" class="small" data-value="option5" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 5</a></li>
+                          <li><a href="#" class="small" data-value="option6" tabIndex="-1"><input type="checkbox"/>&nbsp;Option 6</a></li>
+                        </ul>
+                      </div>
+                    </div>
+              </div>
+              </div> -->
               <table>
                 <tr>
-                <td>
+                  <td>
                 <input value="Ratios, Proportions and Percents" type="checkbox" name="Ratios, Proportions and Percents">Ratios, Proportions and Percents<br>
                 <input value="Number Theory and Divisibility" type="checkbox"name="Number Theory and Divisibility">Number Theory and Divisibility<br>
                 <input value="Counting Basics and Probability" type="checkbox"name="Counting Basics and Probability">Counting Basics and Probability<br>
@@ -69,7 +118,7 @@
   {% for question in questions %}
   <div class="questionList">
     <a href="{% url 'core:detail' question.id %}">
-      <img class="img-responsive"src="{{ question.questionPicture.url }}" width="1000" height="500">
+      <img class="img-fluid"src="{{ question.questionPicture.url }}" width="1000" height="500">
       <p>created date: {{ question.created_date }}</p>
       <p>topic: {{ question.topic }}</p>
       <p>difficulty: {{ question.difficulty }}</p>
@@ -87,7 +136,7 @@
   <hr>
   <div>
     <a href="{% url 'core:detail' question.id %}">
-      <img class="img-responsive"src="{{ question.questionPicture.url }}" width="1000" height="500">
+      <img class="img-fluid"src="{{ question.questionPicture.url }}" width="1000" height="500">
       <p>created date: {{ question.created_date }}</p>
       <p>topic: {{ question.topic }}</p>
       <p>difficulty: {{ question.difficulty }}</p>
