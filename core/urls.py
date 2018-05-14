@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^logout_user/$', views.logout_user, name='logout_user'),
     url(r'^homepage$', views.homepage, name='homepage'),
     url(r'^questions/(?P<filter_by>[a-zA_Z]+)/$', views.questions, name='questions'),
-    url(r'^(?P<question_id>[0-9]+)/complete/$', views.complete, name='complete'),
+    
 
 ]
