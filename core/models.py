@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+#this function handles all of the posts on the website. when an admin makes a new post, these are all of the
+#variables for each object
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
@@ -20,7 +22,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
+#as for the post, the variables for questions are listed here and when admins make a new question,
+#it receives all of the parameters from here.
 class Question(models.Model):
     GRADES_LIST = (
         ('Freshman', 'Freshman'),

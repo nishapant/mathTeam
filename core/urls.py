@@ -3,6 +3,8 @@ from . import views
 
 app_name = 'core'
 
+#these are the different url patterns that the website can access, they are called from the views.py
+#file
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^register/$', views.UserFormView.as_view(), name='register'),

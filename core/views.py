@@ -17,6 +17,8 @@ def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'core/post_list.html', {'posts': posts})
 
+#this is the function that is loaded when the list of questions is called, it also works on the search functionality of the
+#website by finding the questions under the filter with a serach query
 def question_list(request):
     topiclist = ['Ratios, Proportions and Percents','Number Theory and Divisibility','Counting Basics and Probability'
     , 'Quadratics', 'Probability', 'Advanced Geometrical Concepts', 'Perimeter, Area and Surface Area',
@@ -64,7 +66,9 @@ def question_list(request):
 
 
 
-
+#this function returns the question object to the details page as well as checks the
+#answer of the users input to see if the user got it right or not. it also checks if the
+#user has completed the question or not
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     submitbutton= request.POST.get('submit')
@@ -92,7 +96,7 @@ def detail(request, question_id):
         return render(request, 'core/question_detail.html', {'question': question})
 
 
-
+#this function handles the creating of a new user
 class UserFormView(View):
     form_class = UserForm
     template_name = 'core/registration_form.html'
@@ -118,6 +122,7 @@ class UserFormView(View):
                     return render(request, 'core/homepage_logged_in.html', {})
         return render(request, 'core/registration_form.html', {'form': form, 'error_message': 'your username or email may already be registered. please choose another one'})
 
+#this function logs the user out of the page and returns the user back to the login page
 def logout_user(request):
     logout(request)
     form = UserForm(request.POST or None)
@@ -126,6 +131,7 @@ def logout_user(request):
     }
     return render(request, 'core/login.html', context)
 
+#this function logs the user in to the website and redirects them to the homepage for logged in users
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -160,21 +166,3 @@ def questions(request, filter_by):
             'question_list': users_questions,
             'filter_by': filter_by,
         })
-def complete(request, question_id):
-    question = get_object_or_404(Question, pk=question_id, user=request.user)
-    try:
-        if question.is_complete:
-            question.is_complete = False
-        else:
-            question.is_complete = True
-        question.save()
-    except (KeyError, Question.DoesNotExist):
-        context={
-        'question': question
-        }
-        return render(request, 'core/question_detail.html', context)
-    else:
-        context={
-        'question': question
-        }
-        return render(request, 'core/question_detail.html', context)
