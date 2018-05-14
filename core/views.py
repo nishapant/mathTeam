@@ -78,6 +78,8 @@ def detail(request, question_id):
         return render(request, 'core/question_detail.html', context)
     elif submitAnswerButton:
         input = request.POST.get('answer')
+        question.is_complete=True
+        question.save()
         if input == question.answer:
             correctAnswer = True
         context={
